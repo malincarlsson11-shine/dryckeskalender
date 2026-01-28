@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dryckeskalender – 12 veckor</title>
+    
+    <!-- Länka till CSS-filen för styling -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ===================================
+         STARTSKÄRM (VISAS VID FÖRSTA BESÖKET)
+         =================================== -->
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <h1>Dryckeskalender – 12 veckor</h1>
+            
+            <!-- Syftestext -->
+            <div class="purpose-text">
+                <p><strong>Syftet med denna registrering är att ge dig en överblick över din alkoholkonsumtion och kunna använda den som underlag för reflektion och i dialog med exempelvis behandlare.</strong></p>
+            </div>
+            
+            <!-- Länk till standardglas-information -->
+            <p>
+                <button class="link-button" onclick="openModal()">Vad är ett standardglas?</button>
+            </p>
+            
+            <!-- Informationsboxar om integritet och lagring -->
+            <div class="info-box">
+                <h3>Din integritet</h3>
+                <p>All information sparas bara på din egen enhet och skickas aldrig till någon server. Ingen annan kan se dina uppgifter.</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Samma enhet</h3>
+                <p>Din kalender är knuten till just den här enheten och webbläsaren. Om du byter mobil eller webbläsare kan kalendern inte följa med.</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Automatisk radering</h3>
+                <p>För din integritet raderas kalendern om du inte har uppdaterat den på 5 dagar. Raderingen sker när du öppnar kalendern igen.</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Bra att veta</h3>
+                <p>Om du rensar webbläsarens data eller om telefonen rensar sparad information automatiskt kan kalendern försvinna.</p>
+            </div>
+            
+            <!-- Startknapp -->
+            <div class="start-button-container">
+                <button class="btn-primary" onclick="startCalendar()">Starta min kalender</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- ===================================
+         KALENDERVY (VISAS EFTER START)
+         =================================== -->
+    <div id="calendar-screen">
+        <div class="calendar-header">
+            <h1>Dryckeskalender – 12 veckor</h1>
+            <div class="start-date-info">
+                Startdatum: <strong id="start-date-display"></strong>
+            </div>
+            <p>
+                <button class="link-button" onclick="openModal()">Vad är ett standardglas? ⓘ</button>
+            </p>
+        </div>
+        
+        <!-- Här kommer alla veckokort att skapas dynamiskt med JavaScript -->
+        <div id="weeks-container"></div>
+    </div>
+
+    <!-- ===================================
+         MODAL FÖR STANDARDGLAS-INFORMATION
+         =================================== -->
+    <div id="standard-glass-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <!-- Modal-header med titel och stängknapp -->
+            <div class="modal-header">
+                <h2 class="modal-title">Vad är ett standardglas?</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <!-- Modal-body med innehåll -->
+            <div class="modal-body">
+                <p><strong>Varje enhet nedan är ett standardglas:</strong></p>
+                
+                <!-- Illustration 1: Folköl -->
+                <div class="glass-item">
+                    <div class="glass-icon">🍺</div>
+                    <p class="glass-description">50 cl folköl</p>
+                </div>
+                
+                <!-- Illustration 2: Starköl -->
+                <div class="glass-item">
+                    <div class="glass-icon">🍻</div>
+                    <p class="glass-description">33 cl starköl</p>
+                </div>
+                
+                <!-- Illustration 3: Rött eller vitt vin -->
+                <div class="glass-item">
+                    <div class="glass-icon">🍷</div>
+                    <p class="glass-description">1 glas rött eller vitt vin (10–15 cl)</p>
+                </div>
+                
+                <!-- Illustration 4: Starkvin -->
+                <div class="glass-item">
+                    <div class="glass-icon">🍸</div>
+                    <p class="glass-description">1 litet glas starkvin (8 cl)</p>
+                </div>
+                
+                <!-- Illustration 5: Sprit -->
+                <div class="glass-item">
+                    <div class="glass-icon">🥃</div>
+                    <p class="glass-description">4 cl sprit t.ex. whisky</p>
+                </div>
+                
+                <!-- Vin-guide -->
+                <div class="wine-guide">
+                    <h4>Vin-guide</h4>
+                    <p>Vill du vara extra noggrann så mät upp hur mycket ditt vinglas rymmer och ange antal standardglas enligt guiden nedan:</p>
+                    <ul>
+                        <li>Om vinet innehåller ca 10 % alkohol är ett standardglas 15 cl och en flaska vin (75 cl) rymmer 5 glas</li>
+                        <li>Om vinet innehåller ca 12,5 % alkohol är ett standardglas 12 cl och en flaska vin (75 cl) rymmer 6 glas</li>
+                        <li>Om vinet innehåller ca 14 % alkohol är ett standardglas 11 cl och en flaska vin (75 cl) rymmer 7 glas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Länka till JavaScript-filen (läggs sist så HTML laddas först) -->
+    <script src="app.js"></script>
+</body>
+</html>

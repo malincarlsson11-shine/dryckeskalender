@@ -63,9 +63,12 @@ function initializeApp() {
  * Skapar en ny kalender när användaren klickar på "Starta min kalender"
  */
 function startCalendar() {
+    console.log('startCalendar() körs');
+    
     // Sätt startdatum till idag
     const today = new Date();
     const startDateString = formatDate(today);
+    console.log('Startdatum satt till:', startDateString);
     
     // Skapa tom datastruktur för alla 12 veckor
     const calendarData = {};
@@ -81,10 +84,14 @@ function startCalendar() {
         };
     }
     
+    console.log('Kalenderdata skapad:', calendarData);
+    
     // Spara till localStorage
     localStorage.setItem(STORAGE_KEY, JSON.stringify(calendarData));
     localStorage.setItem(START_DATE_KEY, startDateString);
     updateLastActivity();
+    
+    console.log('Data sparad till localStorage');
     
     // Visa kalendervy
     showCalendarScreen();
@@ -119,11 +126,17 @@ function showCalendarScreen() {
  * Laddar och visar all kalenderdata från localStorage
  */
 function loadCalendarData() {
+    console.log('loadCalendarData() körs');
+    
     // Hämta sparad data
     const savedData = localStorage.getItem(STORAGE_KEY);
     const startDate = localStorage.getItem(START_DATE_KEY);
     
+    console.log('Sparad data:', savedData);
+    console.log('Startdatum:', startDate);
+    
     if (!savedData || !startDate) {
+        console.log('Ingen data hittades, returnerar');
         return;
     }
     
@@ -135,14 +148,18 @@ function loadCalendarData() {
     
     // Rensa tidigare innehåll
     const weeksContainer = document.getElementById('weeks-container');
+    console.log('weeksContainer element:', weeksContainer);
     weeksContainer.innerHTML = '';
     
     // Skapa ett kort för varje vecka
+    console.log('Skapar', TOTAL_WEEKS, 'veckokort');
     for (let weekNum = 1; weekNum <= TOTAL_WEEKS; weekNum++) {
         const weekData = calendarData[`week${weekNum}`];
         const weekCard = createWeekCard(weekNum, weekData);
         weeksContainer.appendChild(weekCard);
+        console.log('Vecka', weekNum, 'tillagd');
     }
+    console.log('Alla veckor skapade!');
 }
 
 /**
